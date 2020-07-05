@@ -83,7 +83,7 @@ public class DefaultUidGenerator implements UidGenerator {
         // Clock moved backwards, refuse to generate uid
         if (currentSecond < lastSecond) {
             long refusedSeconds = lastSecond - currentSecond;
-            BusinessException.failure(String.format("Clock moved backwards. Refusing for %d seconds", refusedSeconds));
+            BusinessException.throwNewException(String.format("Clock moved backwards. Refusing for %d seconds", refusedSeconds));
         }
 
         // At the same second, increase sequence
@@ -123,7 +123,7 @@ public class DefaultUidGenerator implements UidGenerator {
     private long getCurrentSecond() {
         long currentSecond = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
         if (currentSecond - epochSeconds > bitsAllocator.getMaxDeltaSeconds()) {
-            BusinessException.failure("Timestamp bits is exhausted. Refusing UID generate. Now: " + currentSecond);
+            BusinessException.throwNewException("Timestamp bits is exhausted. Refusing UID generate. Now: " + currentSecond);
         }
 
         return currentSecond;
