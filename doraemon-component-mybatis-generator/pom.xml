@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.doraemon.framework</groupId>
+        <artifactId>doraemon-components</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>doraemon-component-mybatis-generator</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>Doraemon Component Of MyBatis Generator</name>
+    <description>Doraemon Component Of MyBatis Generator</description>
+    <url>https://github.com/doraemon-projects/doraemon-components</url>
+    <organization>
+        <name>jfteam</name>
+        <url>http://www.jfteam.org/doraemon-projects</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>fengwp</id>
+            <name>fengwenping</name>
+            <email>fengwp@live.cn</email>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git://github.com/doraemon-projects/doraemon-components</connection>
+        <developerConnection>scm:git://github.com/doraemon-projects/doraemon-components</developerConnection>
+        <url>https://github.com/doraemon-projects/doraemon-components</url>
+    </scm>
+
+    <properties>
+        <doraemon-framework.version>0.0.1-SNAPSHOT</doraemon-framework.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.doraemon.framework</groupId>
+            <artifactId>doraemon-base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
