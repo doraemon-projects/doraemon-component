@@ -31,6 +31,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="org/doraemon/framework/mybatis/dao/TableMapper.xml"/>
+        <mapper resource="org/doraemon/component/mybatis/dao/TableMapper.xml"/>
     </mappers>
 </configuration>

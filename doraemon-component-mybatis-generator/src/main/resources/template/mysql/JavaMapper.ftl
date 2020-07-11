@@ -1,6 +1,6 @@
-package ${model.packageName}.mapper;
+package ${model.packageName}.dao;
 
-import ${model.packageName}.vo.${model.name};
+import ${model.packageName}.bean.${model.name};
 import org.doraemon.framework.base.dao.BaseDao;
 
 /**
@@ -9,5 +9,5 @@ import org.doraemon.framework.base.dao.BaseDao;
 * Author:      fengwenping
 * Date:        ${.now}
 */
-public interface ${model.name}Dao<${model.name}, String> extends BaseDao<${model.name}, String> {
+public interface ${model.name!}Dao extends BaseDao<${model.name}, <#if "java.lang.String"==(model.pkField.javaType)>String<#else>Long</#if>> {
 }

@@ -41,7 +41,12 @@
         t.column_name,
         t.column_comment,
         t.data_type,
-        t.ordinal_position
+        t.ordinal_position,
+        (SELECT count(column_name) FROM information_schema.KEY_COLUMN_USAGE kcu
+        WHERE LOWER(kcu.table_schema) = LOWER(t.table_schema)
+        and LOWER(kcu.table_name) = LOWER(t.table_name)
+        and LOWER(kcu.column_name) = LOWER(t.column_name)
+        AND constraint_name = 'PRIMARY') as pk
         FROM information_schema.COLUMNS t
         <where>
             t.table_schema = #{tableSchema} AND LOWER(t.table_name) = LOWER(#{tableName})

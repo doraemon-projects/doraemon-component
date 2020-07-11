@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Date;
 
 /**
  * @description: 描述
@@ -36,8 +37,12 @@ public class DisposableWorkerIdAssigner extends BaseServiceImpl<WorkerNode, Long
     @Override
     public long assignWorkerId() {
         final WorkerNode workerNode = this.buildWorkerNode();
-        final WorkerNode node = this.insert(workerNode);
-        LOGGER.info("Add worker node:" + node);
+        workerNode.setCreatedBy("system");
+        workerNode.setCreatedDate(new Date());
+        workerNode.setLastModifiedBy("system");
+        workerNode.setLastModifiedDate(new Date());
+        final WorkerNode node = this.insertSelective(workerNode);
+        LOGGER.info("Add worker node: {}", node);
         return node.getId();
     }
 
@@ -47,13 +52,11 @@ public class DisposableWorkerIdAssigner extends BaseServiceImpl<WorkerNode, Long
             workerNodeEntity.setType(WorkerNodeType.CONTAINER.getCode());
             workerNodeEntity.setHostName(DockerUtils.getDockerHost());
             workerNodeEntity.setPort(DockerUtils.getDockerPort());
-
         } else {
             workerNodeEntity.setType(WorkerNodeType.ACTUAL.getCode());
             workerNodeEntity.setHostName(NetUtils.getLocalAddress());
             workerNodeEntity.setPort(System.currentTimeMillis() + "-" + RandomUtils.nextInt(0, 100000));
         }
-
         return workerNodeEntity;
     }
 }

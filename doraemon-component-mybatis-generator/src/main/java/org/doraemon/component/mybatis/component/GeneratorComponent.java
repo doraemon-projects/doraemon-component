@@ -1,5 +1,6 @@
 package org.doraemon.component.mybatis.component;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.doraemon.component.mybatis.dao.TableMapper;
 import org.doraemon.component.mybatis.enums.DatabaseType;
@@ -83,13 +84,19 @@ public class GeneratorComponent {
             final List<ColumnVO> columns = tableVO.getColumns();
             columns.forEach(columnVO -> {
                 FieldModel fieldModel = new FieldModel();
+                if (columnVO.getPk() != null && columnVO.getPk() > 0) {
+                    entityModel.setPkField(fieldModel);
+                }
+                fieldModel.setPk(columnVO.getPk());
                 fieldModel.setColumnName(columnVO.getColumnName());
+                fieldModel.setPropertyName(StringHelper.underLine2Camel(columnVO.getColumnName()));
                 fieldModel.setName(StringHelper.underLine2Camel(columnVO.getColumnName()));
                 fieldModel.setComment(columnVO.getColumnComment());
-                fieldModel.setJdbcType(columnVO.getDataType());
+                fieldModel.setJdbcType(columnVO.getDataType().toUpperCase());
                 fieldModel.setJavaType(SqlHelper.getJavaType(this.databaseType, columnVO.getDataType()));
                 entityModel.getFields().add(fieldModel);
             });
+            entityModel.getFields().sort(Comparator.comparing(FieldModel::getPk).reversed());
         });
         this.generateFile(databaseType.getCode().toLowerCase() + "/" + GeneratorProperties.JAVA_MODEL_TEMPLATE_NAME);
         this.generateFile(databaseType.getCode().toLowerCase() + "/" + GeneratorProperties.XML_MAPPER_TEMPLATE_NAME);

@@ -1,9 +1,5 @@
 package org.doraemon.component.mybatis.util;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -55,9 +51,17 @@ public final class StringHelper {
 
     public static String subPrefix(String s) {
         if (s != null && s.length() > 0 && s.contains(".")) {
-            return s.substring(s.lastIndexOf(".")+1);
+            return s.substring(s.lastIndexOf(".") + 1);
         }
         return "";
+    }
+
+    public static String firstChar2Upper(String str) {
+        char[] chars = str.toCharArray();
+        if (chars[0] >= 'a' && chars[0] <= 'z') {
+            chars[0] = (char) (chars[0] - 32);
+        }
+        return new String(chars);
     }
 
     public static void main(String[] args) {

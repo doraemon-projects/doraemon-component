@@ -1,8 +1,8 @@
-package org.jfteam;
+package org.doraemon;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.doraemon.framework.util.JSON;
-import org.doraemon.framework.util.StringUtils;
 import org.doraemon.component.mybatis.dao.TableMapper;
 import org.doraemon.component.mybatis.util.FreemarkerUtils;
 import org.doraemon.component.mybatis.util.MyBatisUtils;

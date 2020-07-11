@@ -3,12 +3,11 @@
     <Properties>
         <Property name="dbType" value="MySQL"/>
         <Property name="schema" value="test"/>
-        <Property name="package" value="org.doraemon.framework.registry"/>
-        <Property name="modelSuffix" value="VO"/>
+        <Property name="package" value="org.doraemon.component.uid.worker"/>
+        <Property name="modelSuffix" value=""/>
         <Property name="outDirectory" value="/"/>
     </Properties>
     <Tables>
-        <Table name="sys_lookup_classify" model="LookupClassify"/>
-        <Table name="sys_lookup_item" model="LookupItem"/>
+        <Table name="DORM_WORKER_NODE" model="WorkerNode"/>
     </Tables>
 </Configuration>

@@ -4,9 +4,10 @@ import org.doraemon.component.uid.worker.bean.WorkerNode;
 import org.doraemon.framework.base.dao.BaseDao;
 
 /**
- * @description: 描述
- * @author: fengwenping
- * @date: 2020-07-05 18:01
+ * Created with IntelliJ IDEA.
+ * Description: 服务器节点访问数据库Dao
+ * Author:      fengwenping
+ * Date:        2020年7月11日 下午10:41:34
  */
 public interface WorkerNodeDao extends BaseDao<WorkerNode, Long> {
 }

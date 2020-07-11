@@ -17,6 +17,7 @@ public class ColumnVO implements Serializable {
     private String columnComment;
     private String dataType;
     private Integer ordinalPosition;
+    private Integer pk;
 
     public String getTableSchema() {
         return tableSchema;
@@ -64,6 +65,14 @@ public class ColumnVO implements Serializable {
 
     public void setOrdinalPosition(Integer ordinalPosition) {
         this.ordinalPosition = ordinalPosition;
+    }
+
+    public Integer getPk() {
+        return pk;
+    }
+
+    public void setPk(Integer pk) {
+        this.pk = pk;
     }
 
     @Override

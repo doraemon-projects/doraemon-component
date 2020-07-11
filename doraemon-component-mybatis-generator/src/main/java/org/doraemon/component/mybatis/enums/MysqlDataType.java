@@ -22,15 +22,15 @@ public enum MysqlDataType implements IEnumProvider {
     BOOLEAN("BOOLEAN", "java.lang.Integer"),
     SMALLINT("SMALLINT", "java.lang.Integer"),
     MEDIUMINT("MEDIUMINT", "java.lang.Integer"),
-    BIGINT("BIGINT", "java.math.BigInteger"),
+    BIGINT("BIGINT", "java.lang.Long"),
     FLOAT("FLOAT", "java.lang.Float"),
     DOUBLE("DOUBLE", "java.lang.Double"),
     DECIMAL("DECIMAL", "java.math.BigDecimal"),
-    DATE("DATE", "java.lang.Date"),
-    TIME("TIME", "java.lang.Date"),
-    DATETIME("DATETIME", "java.lang.Date"),
-    TIMESTAMP("TIMESTAMP", "java.lang.Date"),
-    YEAR("YEAR", "java.lang.Date");
+    DATE("DATE", "java.util.Date"),
+    TIME("TIME", "java.util.Date"),
+    DATETIME("DATETIME", "java.util.Date"),
+    TIMESTAMP("TIMESTAMP", "java.util.Date"),
+    YEAR("YEAR", "java.util.Date");
 
 
     String jdbcType;

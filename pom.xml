@@ -12,8 +12,10 @@
     <modules>
 <!--        <module>./doraemon-component-excel</module>-->
         <module>./doraemon-component-id-generator</module>
+        <module>./doraemon-component-junit</module>
 <!--        <module>./doraemon-component-message</module>-->
         <module>./doraemon-component-mybatis-generator</module>
+        <module>./doraemon-component-security</module>
     </modules>
 
     <properties>

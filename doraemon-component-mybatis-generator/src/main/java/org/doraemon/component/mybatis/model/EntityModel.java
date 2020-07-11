@@ -16,6 +16,7 @@ public class EntityModel implements Serializable {
     private String name;
     private String tableName;
     private String comment;
+    private FieldModel pkField;
     private List<FieldModel> fields = new ArrayList<>();
 
     public EntityModel(String packageName, String name, String tableName, String comment) {
@@ -55,6 +56,14 @@ public class EntityModel implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public FieldModel getPkField() {
+        return pkField;
+    }
+
+    public void setPkField(FieldModel pkField) {
+        this.pkField = pkField;
     }
 
     public List<FieldModel> getFields() {

@@ -10,6 +10,8 @@ import java.io.Serializable;
  */
 public class FieldModel implements Serializable {
 
+    private Integer pk;
+
     /**
      * 名称
      */
@@ -19,6 +21,11 @@ public class FieldModel implements Serializable {
      * 列名
      */
     private String columnName;
+
+    /**
+     * 属性名
+     */
+    private String propertyName;
     /**
      * java数据类型
      */
@@ -32,6 +39,14 @@ public class FieldModel implements Serializable {
      * 描述
      */
     private String comment;
+
+    public Integer getPk() {
+        return pk;
+    }
+
+    public void setPk(Integer pk) {
+        this.pk = pk;
+    }
 
     public String getName() {
         return name;
@@ -71,5 +86,13 @@ public class FieldModel implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getPropertyName() {
+        return propertyName;
+    }
+
+    public void setPropertyName(String propertyName) {
+        this.propertyName = propertyName;
     }
 }

@@ -5,10 +5,11 @@ import org.doraemon.component.uid.buffer.RejectedPutBufferHandler;
 import org.doraemon.component.uid.buffer.RejectedTakeBufferHandler;
 import org.doraemon.component.uid.buffer.RingBuffer;
 import org.doraemon.framework.exception.ApplicationRuntimeException;
-import org.doraemon.framework.exception.BusinessException;
+import org.doraemon.framework.util.AssertUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Named;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class CachedUidGenerator extends DefaultUidGenerator {
     private RingBuffer ringBuffer;
     private BufferPaddingExecutor bufferPaddingExecutor;
 
-    @Override
+    @PostConstruct
     public void afterPropertiesSet() throws Exception {
         // initialize workerId & bitsAllocator
         super.afterPropertiesSet();
@@ -122,22 +123,22 @@ public class CachedUidGenerator extends DefaultUidGenerator {
      * Setters for spring property
      */
     public void setBoostPower(int boostPower) {
-        BusinessException.isTrue(boostPower > 0, "Boost power must be positive!");
+        AssertUtils.assertTrue(boostPower > 0, "Boost power must be positive!");
         this.boostPower = boostPower;
     }
 
     public void setRejectedPutBufferHandler(RejectedPutBufferHandler rejectedPutBufferHandler) {
-        //BusinessException.assertEquals(rejectedPutBufferHandler, null, "RejectedPutBufferHandler can't be null!");
+        AssertUtils.assertNotNull(rejectedPutBufferHandler, "RejectedPutBufferHandler can't be null!");
         this.rejectedPutBufferHandler = rejectedPutBufferHandler;
     }
 
     public void setRejectedTakeBufferHandler(RejectedTakeBufferHandler rejectedTakeBufferHandler) {
-        //BusinessException.assertEquals(rejectedTakeBufferHandler, null, "RejectedTakeBufferHandler can't be null!");
+        AssertUtils.assertNotNull(rejectedTakeBufferHandler, "RejectedTakeBufferHandler can't be null!");
         this.rejectedTakeBufferHandler = rejectedTakeBufferHandler;
     }
 
     public void setScheduleInterval(long scheduleInterval) {
-        BusinessException.isTrue(scheduleInterval > 0, "Schedule interval must positive!");
+        AssertUtils.assertTrue(scheduleInterval > 0, "Schedule interval must positive!");
         this.scheduleInterval = scheduleInterval;
     }
 

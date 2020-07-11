@@ -15,7 +15,7 @@
  */
 package org.doraemon.component.uid.buffer;
 
-import org.doraemon.framework.exception.BusinessException;
+import org.doraemon.framework.util.AssertUtils;
 import org.doraemon.framework.util.NamingThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -181,7 +181,7 @@ public class BufferPaddingExecutor {
      * Setters
      */
     public void setScheduleInterval(long scheduleInterval) {
-        BusinessException.assertTrue(scheduleInterval > 0, "Schedule interval must positive!");
+        AssertUtils.assertTrue(scheduleInterval > 0, "Schedule interval must positive!");
         this.scheduleInterval = scheduleInterval;
     }
 

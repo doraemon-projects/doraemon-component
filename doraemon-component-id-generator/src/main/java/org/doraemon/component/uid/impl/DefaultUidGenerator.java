@@ -1,18 +1,20 @@
 package org.doraemon.component.uid.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.doraemon.component.uid.UidGenerator;
 import org.doraemon.component.uid.worker.BitsAllocator;
 import org.doraemon.component.uid.worker.service.WorkerIdAssigner;
 import org.doraemon.framework.exception.ApplicationException;
-import org.doraemon.framework.exception.BusinessException;
+import org.doraemon.framework.util.AssertUtils;
 import org.doraemon.framework.util.DateUtils;
-import org.doraemon.framework.util.StringUtils;
+import org.doraemon.framework.util.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -77,13 +79,33 @@ public class DefaultUidGenerator implements UidGenerator {
         }
     }
 
+    @Override
+    public String parseUID(long uid) {
+        long totalBits = BitsAllocator.TOTAL_BITS;
+        long signBits = bitsAllocator.getSignBits();
+        long timestampBits = bitsAllocator.getTimestampBits();
+        long workerIdBits = bitsAllocator.getWorkerIdBits();
+        long sequenceBits = bitsAllocator.getSequenceBits();
+
+        // parse UID
+        long sequence = (uid << (totalBits - sequenceBits)) >>> (totalBits - sequenceBits);
+        long workerId = (uid << (timestampBits + signBits)) >>> (totalBits - workerIdBits);
+        long deltaSeconds = uid >>> (workerIdBits + sequenceBits);
+
+        Date thatTime = new Date(TimeUnit.SECONDS.toMillis(epochSeconds + deltaSeconds));
+        String thatTimeStr = DateUtils.defaultFormatDate(thatTime);
+
+        // format as string
+        return String.format("{\"UID\":\"%d\",\"timestamp\":\"%s\",\"workerId\":\"%d\",\"sequence\":\"%d\"}", uid, thatTimeStr, workerId, sequence);
+    }
+
     protected synchronized long nextId() {
         long currentSecond = getCurrentSecond();
 
         // Clock moved backwards, refuse to generate uid
         if (currentSecond < lastSecond) {
             long refusedSeconds = lastSecond - currentSecond;
-            BusinessException.throwNewException(String.format("Clock moved backwards. Refusing for %d seconds", refusedSeconds));
+            ExceptionUtils.throwNewException(String.format("Clock moved backwards. Refusing for %d seconds", refusedSeconds));
         }
 
         // At the same second, increase sequence
@@ -123,7 +145,7 @@ public class DefaultUidGenerator implements UidGenerator {
     private long getCurrentSecond() {
         long currentSecond = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
         if (currentSecond - epochSeconds > bitsAllocator.getMaxDeltaSeconds()) {
-            BusinessException.throwNewException("Timestamp bits is exhausted. Refusing UID generate. Now: " + currentSecond);
+            ExceptionUtils.throwNewException("Timestamp bits is exhausted. Refusing UID generate. Now: " + currentSecond);
         }
 
         return currentSecond;

@@ -15,7 +15,7 @@
  */
 package org.doraemon.component.uid.worker;
 
-import org.doraemon.framework.exception.BusinessException;
+import org.doraemon.framework.util.AssertUtils;
 
 public class BitsAllocator {
     /**
@@ -51,7 +51,7 @@ public class BitsAllocator {
     public BitsAllocator(int timestampBits, int workerIdBits, int sequenceBits) {
         // make sure allocated 64 bits
         int allocateTotalBits = signBits + timestampBits + workerIdBits + sequenceBits;
-        BusinessException.assertTrue(allocateTotalBits == TOTAL_BITS, "allocate not enough 64 bits");
+        AssertUtils.assertTrue(allocateTotalBits == TOTAL_BITS, "allocate not enough 64 bits");
 
         // initialize bits
         this.timestampBits = timestampBits;

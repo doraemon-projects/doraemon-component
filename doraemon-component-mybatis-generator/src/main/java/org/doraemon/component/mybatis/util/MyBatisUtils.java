@@ -1,10 +1,10 @@
 package org.doraemon.component.mybatis.util;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.doraemon.framework.util.PropertyUtils;
-import org.doraemon.framework.util.StringUtils;
 
 import java.io.InputStream;
 import java.util.Properties;

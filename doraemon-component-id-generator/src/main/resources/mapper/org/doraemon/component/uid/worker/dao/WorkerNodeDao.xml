@@ -1,15 +1,105 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.doraemon.component.uid.worker.dao.WorkerNodeDao">
-    <resultMap id="baseResultWorkerNode" type="org.doraemon.component.uid.worker.bean.WorkerNode">
-        <id property="id" column="ID" jdbcType="BIGINT"/>
-        <result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR"/>
-        <result property="createdDate" column="CREATED_DATE" jdbcType="TIMESTAMP"/>
-        <result property="lastModifiedBy" column="LAST_MODIFIED_BY" jdbcType="VARCHAR"/>
-        <result property="lastModifiedDate" column="LAST_MODIFIED_DATE" jdbcType="TIMESTAMP"/>
-        <result property="hostName" column="HOST_NAME" jdbcType="VARCHAR"/>
-        <result property="port" column="PORT" jdbcType="VARCHAR"/>
-        <result property="type" column="TYPE" jdbcType="INTEGER"/>
-        <result property="launchDate" column="LAUNCH_DATE" jdbcType="DATE"/>
+    <resultMap id="BaseResultMap" type="org.doraemon.component.uid.worker.bean.WorkerNode">
+        <id property="id" column="ID" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        <result property="createdBy" column="CREATED_BY" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="createdDate" column="CREATED_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        <result property="lastModifiedBy" column="LAST_MODIFIED_BY" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="lastModifiedDate" column="LAST_MODIFIED_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        <result property="hostName" column="HOST_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="port" column="PORT" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="type" column="TYPE" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="launchDate" column="LAUNCH_DATE" javaType="java.util.Date" jdbcType="DATE"/>
     </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="org.doraemon.component.uid.worker.bean.WorkerNode">
+        insert into DORM_WORKER_NODE
+        (
+        ID,
+        CREATED_BY,
+        CREATED_DATE,
+        LAST_MODIFIED_BY,
+        LAST_MODIFIED_DATE,
+        HOST_NAME,
+        PORT,
+        TYPE,
+        LAUNCH_DATE
+        )
+        values
+        (
+        #{id},
+        #{createdBy},
+        #{createdDate},
+        #{lastModifiedBy},
+        #{lastModifiedDate},
+        #{hostName},
+        #{port},
+        #{type},
+        #{launchDate}
+        )
+    </insert>
+
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="org.doraemon.component.uid.worker.bean.WorkerNode">
+        insert into DORM_WORKER_NODE
+        (
+        <if test="id!=null">
+            ID,
+        </if>
+        <if test="createdBy!=null and createdBy!=''">
+            CREATED_BY,
+        </if>
+        <if test="createdDate!=null">
+            CREATED_DATE,
+        </if>
+        <if test="lastModifiedBy!=null and lastModifiedBy!=''">
+            LAST_MODIFIED_BY,
+        </if>
+        <if test="lastModifiedDate!=null">
+            LAST_MODIFIED_DATE,
+        </if>
+        <if test="hostName!=null and hostName!=''">
+            HOST_NAME,
+        </if>
+        <if test="port!=null and port!=''">
+            PORT,
+        </if>
+        <if test="type!=null">
+            TYPE,
+        </if>
+        <if test="launchDate!=null">
+            LAUNCH_DATE
+        </if>
+        )
+        values
+        (
+        <if test="id!=null">
+            #{id},
+        </if>
+        <if test="createdBy!=null and createdBy!=''">
+            #{createdBy},
+        </if>
+        <if test="createdDate!=null">
+            #{createdDate},
+        </if>
+        <if test="lastModifiedBy!=null and lastModifiedBy!=''">
+            #{lastModifiedBy},
+        </if>
+        <if test="lastModifiedDate!=null">
+            #{lastModifiedDate},
+        </if>
+        <if test="hostName!=null and hostName!=''">
+            #{hostName},
+        </if>
+        <if test="port!=null and port!=''">
+            #{port},
+        </if>
+        <if test="type!=null">
+            #{type},
+        </if>
+        <if test="launchDate!=null">
+            #{launchDate}
+        </if>
+        )
+    </insert>
 </mapper>

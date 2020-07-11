@@ -48,7 +48,6 @@
         <dependency>
             <groupId>org.doraemon.framework</groupId>
             <artifactId>doraemon-base</artifactId>
-            <version>${doraemon-framework.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.inject</groupId>
@@ -65,8 +64,8 @@
 
         <!--test-->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.doraemon.framework</groupId>
+            <artifactId>doraemon-component-junit</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

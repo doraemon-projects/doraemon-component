@@ -10,4 +10,6 @@ import org.doraemon.framework.exception.ApplicationException;
 public interface UidGenerator {
 
     long getUID() throws ApplicationException;
+
+    String parseUID(long uid) throws ApplicationException;
 }

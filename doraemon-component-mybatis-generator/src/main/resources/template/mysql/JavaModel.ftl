@@ -7,13 +7,17 @@ package ${model.packageName}.vo;
 * Author:      fengwenping
 * Date:        ${.now}
 */
-@Data
-public class ${model.name} {
+public class ${model.name!} {
     <#list model.fields as field>
-
+    <#if field.name!='id'
+    &&field.name!='createdBy'
+    &&field.name!='createdDate'
+    &&field.name!='lastModifiedBy'
+    &&field.name!='lastModifiedDate'>
     /**
     * ${field.comment}
     */
     private ${StringHelper.subPrefix(field.javaType)!} ${field.name};
+    </#if>
     </#list>
 }

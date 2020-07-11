@@ -1,6 +1,6 @@
 package org.doraemon.component.uid.buffer;
 
-import org.doraemon.framework.exception.BusinessException;
+import org.doraemon.framework.util.AssertUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -69,9 +69,9 @@ public class RingBuffer {
      *                      padding buffer will be triggered when tail-cursor<threshold
      */
     public RingBuffer(int bufferSize, int paddingFactor) {
-        BusinessException.assertTrue(bufferSize > 0L, "RingBuffer size must be positive");
-        BusinessException.assertTrue(Integer.bitCount(bufferSize) == 1, "RingBuffer size must be a power of 2");
-        BusinessException.assertTrue(paddingFactor > 0 && paddingFactor < 100, "RingBuffer size must be positive");
+        AssertUtils.assertNotZero(bufferSize, "RingBuffer size must be positive");
+        AssertUtils.assertTrue(Integer.bitCount(bufferSize) == 1, "RingBuffer size must be a power of 2");
+        AssertUtils.assertTrue(paddingFactor > 0 && paddingFactor < 100, "RingBuffer size must be positive");
 
         this.bufferSize = bufferSize;
         this.indexMask = bufferSize - 1;
@@ -137,7 +137,7 @@ public class RingBuffer {
         long nextCursor = cursor.updateAndGet(old -> old == tail.get() ? old : old + 1);
 
         // check for safety consideration, it never occurs
-        BusinessException.assertTrue(nextCursor >= currentCursor, "Curosr can't move back");
+        AssertUtils.assertTrue(nextCursor >= currentCursor, "Curosr can't move back");
 
         // trigger padding in an async-mode if reach the threshold
         long currentTail = tail.get();
@@ -154,7 +154,7 @@ public class RingBuffer {
 
         // 1. check next slot flag is CAN_TAKE_FLAG
         int nextCursorIndex = calSlotIndex(nextCursor);
-        BusinessException.assertTrue(flags[nextCursorIndex].get() == CAN_TAKE_FLAG, "Curosr not in can take status");
+        AssertUtils.assertTrue(flags[nextCursorIndex].get() == CAN_TAKE_FLAG, "Cursor not in can take status");
 
         // 2. get UID from next slot
         // 3. set next slot flag as CAN_PUT_FLAG.
